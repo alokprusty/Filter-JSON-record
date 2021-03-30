@@ -509,7 +509,7 @@ exports.getRecords = (req, res) => {
             return res.json({message: `Page number should be from 1 to ${maxPageNumber}`});
         }
         let openDisposition = [];
-        let closeDisposition = [];
+        let closeDispositionCount = 0;
         let ids = [];
         let startLimit = (parseInt(req.params.pageNumber) * 10) - 10;
         let endLimit = startLimit + 10;
@@ -520,10 +520,10 @@ exports.getRecords = (req, res) => {
             if (jsonData[i].disposition == 'open') {
                 openDisposition.push(jsonData[i]);
             } else if (jsonData[i].disposition == 'closed' && jsonData[i].color =="red" || jsonData[i].color =="green" || jsonData[i].color =="blue"){
-                closeDisposition.push(jsonData[i])
+                closeDispositionCount ++;
             }
             if ((i + 1) == endLimit) {
-                res.json({ Ids: ids, Open: openDisposition, ClosedCount: closeDisposition.length, PreviousPage: req.params.pageNumber==1 ? null : (parseInt(req.params.pageNumber)-1)  , NextPage: req.params.pageNumber==maxPageNumber ? null : (parseInt(req.params.pageNumber)+1) })
+                res.json({ Ids: ids, Open: openDisposition, ClosedCount: closeDispositionCount, PreviousPage: req.params.pageNumber==1 ? null : (parseInt(req.params.pageNumber)-1)  , NextPage: req.params.pageNumber==maxPageNumber ? null : (parseInt(req.params.pageNumber)+1) })
             }
         }
     } else {

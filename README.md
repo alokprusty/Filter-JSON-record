@@ -12,7 +12,18 @@
     
     Response: 
         {
-            "Ids": "An array containing the ids of all items returned from the request",
+            "Ids": [
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20
+            ],
             "Open": [
                 {
                     "id": 12,
